@@ -4,7 +4,10 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "hashicorp/precise64"
 
-  # config.vm.provision :shell, :inline => "apt-get install -y vim curl git"
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+    vb.customize ["modifyvm", :id, "--vram", "64"]
+  end
 
   config.vm.provision :shell, :inline => <<-EOH
     apt-get update
